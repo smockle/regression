@@ -8,7 +8,7 @@
 
 # regression
 
-Single or multi dimensional matrices and regression functions.
+Estimate multiple linear regression fit using least squares.
 
 ## Installation
 
