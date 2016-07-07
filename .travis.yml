@@ -1,7 +1,7 @@
 language: node_js
 node_js:
 - '6'
-- 6.2.2
+- 6.3.0
 - '4'
 - 4.4.7
 notifications:
@@ -12,7 +12,7 @@ cache:
   directories:
   - node_modules
 before_install:
-- npm install -g npm@3.9.5
+- npm install -g npm@3.10.3
 after_script:
 - npm run coverage
 - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
