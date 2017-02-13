@@ -5,6 +5,7 @@
 [![Test Coverage](https://codeclimate.com/github/smockle/regression/badges/coverage.svg)](https://codeclimate.com/github/smockle/regression/coverage)
 [![Coverage Status](https://coveralls.io/repos/github/smockle/regression/badge.svg?branch=master)](https://coveralls.io/github/smockle/regression?branch=master)
 [![Known Vulnerabilities](https://snyk.io/test/npm/@smockle/regression/badge.svg)](https://snyk.io/test/npm/@smockle/regression)
+[![Greenkeeper badge](https://badges.greenkeeper.io/smockle/regression.svg)](https://greenkeeper.io/)
 
 # regression
 
