@@ -8,6 +8,8 @@
 
 # regression
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/smockle/regression.svg)](https://greenkeeper.io/)
+
 Estimate multiple linear regression fit using least squares.
 
 ## Installation
