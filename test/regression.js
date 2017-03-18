@@ -1,11 +1,11 @@
-const math = require("mathjs");
-const test = require("tape");
-const inspect = require("util").inspect;
-const Matrix = require("@smockle/matrix");
-const Regression = require("../lib/regression");
+const math = require('mathjs')
+const test = require('tape')
+const inspect = require('util').inspect
+const Matrix = require('@smockle/matrix')
+const Regression = require('../lib/regression')
 
-test("Regression", function(t) {
-  t.plan(20);
+test('Regression', function (t) {
+  t.plan(20)
 
   // VBR Return (Return-RF)
   const RAR = [
@@ -21,7 +21,7 @@ test("Regression", function(t) {
     6.628808772,
     1.316931792,
     -4.898786803
-  ];
+  ]
 
   // Market (MKT-RF)
   const MKT = [
@@ -37,7 +37,7 @@ test("Regression", function(t) {
     7.75,
     0.56,
     -2.17
-  ];
+  ]
 
   // Size
   const SMB = [
@@ -53,7 +53,7 @@ test("Regression", function(t) {
     -1.86,
     3.55,
     -2.99
-  ];
+  ]
 
   // Value
   const HML = [
@@ -69,7 +69,7 @@ test("Regression", function(t) {
     -0.32,
     -1.23,
     -2.07
-  ];
+  ]
 
   // Momentum
   const UMD = [
@@ -85,11 +85,11 @@ test("Regression", function(t) {
     -3.92,
     2.43,
     3.38
-  ];
+  ]
 
-  const r = Regression([MKT, SMB, HML, UMD], RAR);
-  t.equal(r.n, 12, "n observations");
-  t.equal(r.p, 4, "p factor terms");
+  const r = Regression([MKT, SMB, HML, UMD], RAR)
+  t.equal(r.n, 12, 'n observations')
+  t.equal(r.p, 4, 'p factor terms')
   t.deepEqual(
     r.X,
     Matrix([
@@ -106,8 +106,8 @@ test("Regression", function(t) {
       [1, 0.56, 3.55, -1.23, 2.43],
       [1, -2.17, -2.99, -2.07, 3.38]
     ]),
-    "X matrix"
-  );
+    'X matrix'
+  )
   t.deepEqual(
     r.Y,
     Matrix([
@@ -124,8 +124,8 @@ test("Regression", function(t) {
       [1.316931792],
       [-4.898786803]
     ]),
-    "Y matrix"
-  );
+    'Y matrix'
+  )
 
   t.deepEqual(
     r.B,
@@ -136,8 +136,8 @@ test("Regression", function(t) {
       [0.29410972011067305],
       [0.0758741075412841]
     ]),
-    "β coefficients factor terms"
-  );
+    'β coefficients factor terms'
+  )
   t.deepEqual(
     r.fitted,
     [
@@ -154,9 +154,9 @@ test("Regression", function(t) {
       [1.912405522995039],
       [-4.018104935765246]
     ],
-    "fitted Y values"
-  );
-  t.equal(r.mean, -0.3416364248333333, "mean Y value");
+    'fitted Y values'
+  )
+  t.equal(r.mean, -0.3416364248333333, 'mean Y value')
 
   t.deepEqual(
     r.residuals,
@@ -174,21 +174,21 @@ test("Regression", function(t) {
       [-0.5954737309950389],
       [-0.8806818672347543]
     ],
-    "residual Y values"
-  );
-  t.equal(r.SST, 155.93033742014742, "SST total sum of squares");
-  t.equal(r.SSE, 151.14498353223317, "SSE explained sum of squares");
-  t.equal(r.SSR, 4.785353887914211, "SSR residual sum of squares");
+    'residual Y values'
+  )
+  t.equal(r.SST, 155.93033742014742, 'SST total sum of squares')
+  t.equal(r.SSE, 151.14498353223317, 'SSE explained sum of squares')
+  t.equal(r.SSR, 4.785353887914211, 'SSR residual sum of squares')
   t.equal(
-    math.format(r.SST, { notation: "fixed", precision: 8 }),
-    math.format(r.SSE + r.SSR, { notation: "fixed", precision: 8 }),
-    "SST = SSE + SSR"
-  );
-  t.equal(r.Rsquared, 0.969310950216055, "R² coefficient of determination");
-  t.equal(r.Rsquaredadj, 0.9578025565470756, "adjusted R²");
-  t.equal(r.stderr, 0.8268143588422642, "standard error of regression");
+    math.format(r.SST, {notation: 'fixed', precision: 8}),
+    math.format(r.SSE + r.SSR, {notation: 'fixed', precision: 8}),
+    'SST = SSE + SSR'
+  )
+  t.equal(r.Rsquared, 0.969310950216055, 'R² coefficient of determination')
+  t.equal(r.Rsquaredadj, 0.9578025565470756, 'adjusted R²')
+  t.equal(r.stderr, 0.8268143588422642, 'standard error of regression')
 
-  t.equal(r.MSE, 0.6917625234077234, "MSE mean standard error");
+  t.equal(r.MSE, 0.6917625234077234, 'MSE mean standard error')
   t.deepEqual(
     r.VAR,
     Matrix([
@@ -228,7 +228,7 @@ test("Regression", function(t) {
         0.008750503967407862
       ]
     ])
-  );
+  )
   t.deepEqual(
     r.STDERR,
     [
@@ -238,8 +238,8 @@ test("Regression", function(t) {
       0.22102630590576378,
       0.09354412844966734
     ],
-    "standard error matrix (diagonal of variance)"
-  );
+    'standard error matrix (diagonal of variance)'
+  )
   t.deepEqual(
     r.TSTAT,
     [
@@ -249,13 +249,13 @@ test("Regression", function(t) {
       1.3306548236664144,
       0.8111049704430051
     ],
-    "test statistic (significance)"
-  );
+    'test statistic (significance)'
+  )
 
   // Regression#inspect
   t.equal(
     inspect(r),
-    "R²: 96.93%\nAdj R²: 95.78%\nStd Err: 0.83\n\ny: -0.12 (t-stat -0.43)\nx1: 1.00 (t-stat 10.78)\nx2: 0.46 (t-stat 4.88)\nx3: 0.29 (t-stat 1.33)\nx4: 0.08 (t-stat 0.81)",
-    "inspect regression"
-  );
-});
+    'R²: 96.93%\nAdj R²: 95.78%\nStd Err: 0.83\n\ny: -0.12 (t-stat -0.43)\nx1: 1.00 (t-stat 10.78)\nx2: 0.46 (t-stat 4.88)\nx3: 0.29 (t-stat 1.33)\nx4: 0.08 (t-stat 0.81)',
+    'inspect regression'
+  )
+})
