@@ -43,7 +43,7 @@
   "snyk": true,
   "lint-staged": {
     "*.js": [
-      "prettier --write",
+      "./node_modules/.bin/prettier --write",
       "git add"
     ]
   },
