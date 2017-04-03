@@ -51,7 +51,7 @@
   "dependencies": {
     "@smockle/matrix": "^1.0.2",
     "lodash": "^4.11.2",
-    "mathjs": "^3.2.1",
+    "mathjs": "3.11.3",
     "snyk": "^1.17.2"
   }
 }
