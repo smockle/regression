@@ -1,17 +1,13 @@
 language: node_js
 node_js:
-- '7'
+- '8'
 - '6'
 notifications:
   email:
     on_success: change
     on_failure: always
-before_install:
-- npm install -g npm@4
 after_script:
-- npm run coverage
-- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-- "./node_modules/.bin/codeclimate-test-reporter < ./coverage/lcov.info"
+- npm run coveralls
 env:
   global:
   - secure: 0M9upf0teyrdkp2qJ2HCf2GJ/rGTwi07o4iYq40oubwYr/5GdQ5FHn+KYD3BlA5CLjY8VjOi+6SOK0t6thwmBs+nvtA/953+O9qdGJwqhbtq3oF/3EDZopo4R76+jg15Tsj6mLaHpZ1sh90NXjTtoyN/PVPNAHUNn1A8quMNsWbWs0e8ysL/1pc+pTKyNgA62oe8shIRCPPiICVlP8skwykoCbSQ9UeoGlad03JznrTnBb29BIywYNYAsPuJQDjONpb+TWs0qS14QP6epziHSFj3InIErsB84QsueldPlKfcKPgaDDEt0yIbZ2TpIUaxavUSwNpGla3UFOnZdbqPfzqO5T/7z7hb3kwh2cevOFcYC7hZHpEM9jU6Bq2Wn6qAFi8t8chspPp3veVDRdmGZdIiFwVHN/bV+rnXdOWkD4H64exQVpUxNGO9r8GD6r6Kvg/25CRJ3ZLMg1FFZx71TazSvmWwTWEHeim2E8tq0DSeElmE2/ZYpu3MBeTW7cqY7+LpLH2Gb2B19wsz6E0iwd8Wvn8TcC71Kq6+/I25SrIpCLlAa25Op3juw85zWQaEfyq8SK4kkyDSpNmEoioHt7OttBfKmD3u/xvRwOrJOAPLt5NdLp6pFUY1QFzj+IU3lBj7v0LNAFBA24r7UfaaXLVN3L7RVyEjo+WA4cyFJVE=

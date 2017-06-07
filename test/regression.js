@@ -180,8 +180,8 @@ test('Regression', function (t) {
   t.equal(r.SSE, 151.14498353223317, 'SSE explained sum of squares')
   t.equal(r.SSR, 4.785353887914211, 'SSR residual sum of squares')
   t.equal(
-    math.format(r.SST, {notation: 'fixed', precision: 8}),
-    math.format(r.SSE + r.SSR, {notation: 'fixed', precision: 8}),
+    math.format(r.SST, { notation: 'fixed', precision: 8 }),
+    math.format(r.SSE + r.SSR, { notation: 'fixed', precision: 8 }),
     'SST = SSE + SSR'
   )
   t.equal(r.Rsquared, 0.969310950216055, 'R² coefficient of determination')
