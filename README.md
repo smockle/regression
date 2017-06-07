@@ -1,7 +1,8 @@
 [![npm](https://img.shields.io/npm/v/@smockle/regression.svg)](https://www.npmjs.com/package/@smockle/regression)
 [![Build Status](https://travis-ci.org/smockle/regression.svg?branch=master)](https://travis-ci.org/smockle/regression)
 [![Build status](https://ci.appveyor.com/api/projects/status/x1sjhd5q1jv1eupd?svg=true)](https://ci.appveyor.com/project/smockle/regression)
-[![Coverage Status](https://coveralls.io/repos/github/smockle/regression/badge.svg?branch=master)](https://coveralls.io/github/smockle/regression?branch=master)
+[![Code Climate](https://codeclimate.com/github/smockle/regression/badges/gpa.svg)](https://codeclimate.com/github/smockle/regression)
+[![Test Coverage](https://codeclimate.com/github/smockle/regression/badges/coverage.svg)](https://codeclimate.com/github/smockle/regression/coverage)
 [![Known Vulnerabilities](https://snyk.io/test/npm/@smockle/regression/badge.svg)](https://snyk.io/test/npm/@smockle/regression)
 [![Greenkeeper badge](https://badges.greenkeeper.io/smockle/regression.svg)](https://greenkeeper.io/)
 
