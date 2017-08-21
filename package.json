@@ -43,7 +43,7 @@
     ]
   },
   "dependencies": {
-    "@smockle/matrix": "^2.0.0",
+    "@smockle/matrix": "^3.0.1",
     "lodash": "^4.17.4",
     "mathjs": "^3.13.3"
   }
