@@ -1,8 +1,11 @@
-const math = require('mathjs')
-const test = require('tape')
-const inspect = require('util').inspect
-const Matrix = require('@smockle/matrix')
-const Regression = require('../lib/regression')
+// @flow
+
+import Regression from '../lib/regression'
+import Matrix from '@smockle/matrix'
+import math from 'mathjs'
+import test from 'tape'
+import util from 'util'
+const { inspect } = util
 
 test('Regression', function (t) {
   t.plan(20)
