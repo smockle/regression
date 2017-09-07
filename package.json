@@ -3,6 +3,7 @@
   "version": "3.0.0",
   "description": "Estimate multiple linear regression fit using least squares",
   "main": "lib/regression.js",
+  "module": "lib/regression.mjs",
   "scripts": {
     "debug": "node --nolazy --inspect-brk=5858 -r @std/esm test/regression.mjs",
     "docs":
