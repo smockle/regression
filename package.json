@@ -1,6 +1,6 @@
 {
   "name": "@smockle/regression",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Estimate multiple linear regression fit using least squares",
   "main": "lib/regression.js",
   "module": "lib/regression.mjs",
