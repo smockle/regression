@@ -50,7 +50,7 @@
     "cjs": true
   },
   "dependencies": {
-    "@smockle/matrix": "^3.0.3",
+    "@smockle/matrix": "^3.0.4",
     "@std/esm": "^0.5.1",
     "lodash": "^4.17.4",
     "mathjs": "^3.13.3"
