@@ -1,6 +1,4 @@
-node_modules
 coverage
-.esm-cache
-.nyc_output
-*.log
-.DS_Store
+dist
+node_modules
+tsconfig.tsbuildinfo
