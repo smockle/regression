@@ -1,5 +1,6 @@
+.github
 coverage
-.esm-cache
-.nyc_output
-.vscode
-*.log
+dist/__tests__
+src
+tsconfig.json
+tsconfig.tsbuildinfo
