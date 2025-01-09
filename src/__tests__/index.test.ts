@@ -109,36 +109,36 @@ describe("Regression", () => {
   });
 
   test("mean Y value", () => {
-    expect(r.mean).toBe(-0.3416364248333333);
+    expect(r.mean).toBeCloseTo(-0.3416364248333333);
   });
 
   test("residual Y values", () => {
     expect(r.residuals).toStrictEqual([
-      [0.8177518669697439],
-      [0.3035165570378622],
-      [1.0610015245255813],
-      [-0.4283521822323959],
-      [-0.2002028202604862],
-      [-1.1104670089456055],
-      [0.1136763315453595],
-      [0.4108421298721101],
-      [0.23236997486312783],
-      [0.27601922485449837],
-      [-0.5954737309950389],
-      [-0.8806818672347543],
+      [expect.closeTo(0.8177518669697439)],
+      [expect.closeTo(0.3035165570378622)],
+      [expect.closeTo(1.0610015245255813)],
+      [expect.closeTo(-0.4283521822323959)],
+      [expect.closeTo(-0.2002028202604862)],
+      [expect.closeTo(-1.1104670089456055)],
+      [expect.closeTo(0.1136763315453595)],
+      [expect.closeTo(0.4108421298721101)],
+      [expect.closeTo(0.23236997486312783)],
+      [expect.closeTo(0.27601922485449837)],
+      [expect.closeTo(-0.5954737309950389)],
+      [expect.closeTo(-0.8806818672347543)],
     ]);
   });
 
   test("SST total sum of squares", () => {
-    expect(r.SST).toBe(155.93033742014742);
+    expect(r.SST).toBeCloseTo(155.93033742014742);
   });
 
   test("SSE explained sum of squares", () => {
-    expect(r.SSE).toBe(151.14498353223317);
+    expect(r.SSE).toBeCloseTo(151.14498353223317);
   });
 
   test("SSR residual sum of squares", () => {
-    expect(r.SSR).toBe(4.785353887914211);
+    expect(r.SSR).toBeCloseTo(4.785353887914211);
   });
 
   test("SST = SSE + SSR", () => {
@@ -148,15 +148,15 @@ describe("Regression", () => {
   });
 
   test("R² coefficient of determination", () => {
-    expect(r.Rsquared).toBe(0.969310950216055);
+    expect(r.Rsquared).toBeCloseTo(0.969310950216055);
   });
 
   test("adjusted R²", () => {
-    expect(r.Rsquaredadj).toBe(0.9578025565470756);
+    expect(r.Rsquaredadj).toBeCloseTo(0.9578025565470756);
   });
 
   test("standard error of regression", () => {
-    expect(r.stderr).toBe(0.8268143588422642);
+    expect(r.stderr).toBeCloseTo(0.8268143588422642);
   });
 
   test("MSE mean standard error", () => {
@@ -205,15 +205,21 @@ describe("Regression", () => {
 
   test("standard error matrix (diagonal of variance)", () => {
     expect(r.STDERR).toStrictEqual([
-      0.26827128526487226, 0.09241561886747593, 0.09512236524147415,
-      0.22102630590576378, 0.09354412844966734,
+      expect.closeTo(0.26827128526487226),
+      expect.closeTo(0.09241561886747593),
+      expect.closeTo(0.09512236524147415),
+      expect.closeTo(0.22102630590576378),
+      expect.closeTo(0.09354412844966734),
     ]);
   });
 
   test("test statistic (significance)", () => {
     expect(r.TSTAT).toStrictEqual([
-      -0.4312989582911469, 10.783257431543538, 4.878603663135374,
-      1.3306548236664144, 0.8111049704430051,
+      expect.closeTo(-0.4312989582911469),
+      expect.closeTo(10.783257431543538),
+      expect.closeTo(4.878603663135374),
+      expect.closeTo(1.3306548236664144),
+      expect.closeTo(0.8111049704430051),
     ]);
   });
 });

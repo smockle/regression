@@ -1,17 +1,11 @@
 /** @module regression */
 
 import Matrix from "@smockle/matrix";
-import {
-  diag,
-  format,
-  mean,
-  multiply,
-  pow,
-  sqrt,
-  sqrtm,
-  subtract,
-} from "mathjs";
+import { diag, format, mean, subtract } from "mathjs";
 import { fill, unzip } from "lodash-es";
+
+type Matrix1D = Extract<Matrix, { __value: number[] }>;
+type Matrix2D = Extract<Matrix, { __value: number[][] }>;
 
 type Regression = {
   /** n observations */
@@ -19,11 +13,11 @@ type Regression = {
   /** p factor terms */
   p: number;
   /** X Matrix */
-  X: Matrix;
+  X: Matrix2D;
   /** Y Matrix */
-  Y: Matrix;
+  Y: Matrix2D;
   /** β coefficients factor terms */
-  B: Matrix;
+  B: Matrix2D;
   /** fitted Y values */
   fitted: number[][];
   /** mean Y value */
@@ -45,7 +39,7 @@ type Regression = {
   /** MSE mean standard error */
   MSE: number;
   /** variance matrix */
-  VAR: Matrix;
+  VAR: Matrix2D;
   /** standard error matrix (diagonal of variance) */
   STDERR: number[];
   /** test statistic (significance) */
@@ -68,39 +62,53 @@ function Regression(X: number[][], Y: number[]): Regression {
   r.Y = Matrix(Y).transpose();
 
   r.B = Matrix.multiply(
-    r.X.transpose().multiply(r.X).invert(),
-    r.X.transpose().multiply(r.Y)
+    Matrix.multiply(r.X.transpose(), r.X).invert(),
+    Matrix.multiply(r.X.transpose(), r.Y)
   );
-  r.fitted = r.X.multiply(r.B).__value as number[][];
-  r.mean = mean(r.Y.__value as number[]);
+  r.fitted = Matrix.multiply(r.X, r.B).__value;
+  r.mean = mean<number>(r.Y.__value);
 
-  // r.residuals = subtract(r.Y.__value, r.fitted);
-  // r.SST = r.Y.__value.reduce((xs, y, i) => xs + pow(y - r.mean, 2), 0);
-  // r.SSE = r.fitted.reduce((xs, _fitted) => xs + pow(_fitted[0] - r.mean, 2), 0);
-  // r.SSR = r.Y.__value.reduce((xs, y, i) => xs + pow(y[0] - r.fitted[i], 2), 0);
-  // r.Rsquared = r.SSE / r.SST;
-  // r.Rsquaredadj = r.Rsquared - ((1 - r.Rsquared) * (r.p - 1)) / (r.n - r.p);
-  // r.stderr = sqrt(
-  //   r.residuals.reduce((xs, residual) => xs + pow(residual[0], 2), 0) /
-  //     (r.n - r.p - 1)
-  // );
+  r.residuals = subtract(r.Y.__value, r.fitted);
+  r.SST = r.Y.__value.reduce(
+    (xs: number, y: number[]) => xs + Math.pow(y[0] - r.mean, 2),
+    0
+  );
+  r.SSE = r.fitted.reduce(
+    (xs: number, _fitted: number[]) => xs + Math.pow(_fitted[0] - r.mean, 2),
+    0
+  );
+  r.SSR = r.Y.__value.reduce(
+    (xs: number, y: number[], i: number) =>
+      xs + Math.pow(y[0] - r.fitted[i][0], 2),
+    0
+  );
+  r.Rsquared = r.SSE / r.SST;
+  r.Rsquaredadj = r.Rsquared - ((1 - r.Rsquared) * (r.p - 1)) / (r.n - r.p);
+  r.stderr = Math.sqrt(
+    r.residuals.reduce(
+      (xs: number, residual: number[]) => xs + Math.pow(residual[0], 2),
+      0
+    ) /
+      (r.n - r.p - 1)
+  );
 
-  r.MSE = sqrt(
+  r.MSE = Math.sqrt(
     r.fitted.reduce(
-      (xs, _fitted, i) =>
-        xs + (pow(_fitted[0] - (r.Y.__value as number[][])[i][0], 2) as number),
+      (xs: number, _fitted: number[], i: number) =>
+        xs + Math.pow(_fitted[0] - r.Y.__value[i][0], 2),
       0
     ) /
       (r.n - 2)
-  ) as number;
-  r.VAR = Matrix(
-    multiply(
-      r.MSE,
-      r.X.transpose().multiply(r.X).invert().__value as number | number[]
-    ) as unknown as number[][]
   );
-  // r.STDERR = sqrt(diag(r.VAR.__value))
-  // r.TSTAT = r.STDERR.map((err, i) => r.B.__value[i] / err);
+  r.VAR = Matrix(
+    Matrix.multiply(r.X.transpose(), r.X)
+      .invert()
+      .__value.map((x: number[]) => x.map((y: number) => y * r.MSE))
+  );
+  r.STDERR = Array.from(diag(r.VAR.__value) as unknown as number[]).map((x) =>
+    Math.sqrt(x)
+  );
+  r.TSTAT = r.STDERR.map((err, i) => r.B.__value[i][0] / err);
   return r;
 }
 
@@ -114,11 +122,11 @@ Regression.prototype[Symbol.for("nodejs.util.inspect.custom")] =
     var output: string = "";
     output += format(
       this.Rsquared,
-      (x: number) => `R²: ${multiply(x, 100).toFixed(2)}%\n`
+      (x: number) => `R²: ${(x * 100).toFixed(2)}%\n`
     );
     output += format(
       this.Rsquaredadj,
-      (x: number) => `Adj R²: ${multiply(x, 100).toFixed(2)}%\n`
+      (x: number) => `Adj R²: ${(x * 100).toFixed(2)}%\n`
     );
     output += format(this.stderr, (x) => `Std Err: ${x.toFixed(2)}\n\n`);
     const labels = ["y"].concat(fill(Array(this.B.__value.length - 1), "x"));

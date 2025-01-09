@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/smockle/regression#readme",
   "dependencies": {
-    "@smockle/matrix": "^4.0.3",
+    "@smockle/matrix": "^5.0.2",
     "lodash-es": "^4.17.21",
     "mathjs": "^14.0.1"
   },
