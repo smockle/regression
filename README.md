@@ -1,5 +1,5 @@
 [![npm](https://img.shields.io/npm/v/@smockle/regression.svg)](https://www.npmjs.com/package/@smockle/regression)
-[![codecov](https://codecov.io/gh/smockle/regression/branch/master/graph/badge.svg)](https://codecov.io/gh/smockle/regression)
+[![codecov](https://codecov.io/gh/smockle/regression/branch/main/graph/badge.svg)](https://codecov.io/gh/smockle/regression)
 
 # regression
 
